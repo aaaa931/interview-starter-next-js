@@ -1,6 +1,4 @@
-import { paths } from 'src/routes/paths';
-
-import axios from 'src/utils/axios';
+import axios, { fetcher, endpoints } from 'src/utils/axios';
 
 // ----------------------------------------------------------------------
 
@@ -46,12 +44,19 @@ export const tokenExpired = (exp) => {
 
   clearTimeout(expiredTimer);
 
-  expiredTimer = setTimeout(() => {
-    alert('Token expired');
+  expiredTimer = setTimeout(async () => {
+    // alert('Token expired');
+    const refreshToken = await fetcher(endpoints.token.refresh, {
+      refreshToken: sessionStorage.getItem('accessToken'),
+    });
 
     sessionStorage.removeItem('accessToken');
+    sessionStorage.setItem('accessToken', refreshToken);
 
-    window.location.href = paths.auth.jwt.login;
+    clearTimeout(expiredTimer);
+    tokenExpired(300);
+
+    // window.location.href = paths.auth.jwt.login;
   }, timeLeft);
 };
 

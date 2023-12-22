@@ -1,4 +1,5 @@
 import { m } from 'framer-motion';
+import { useContext } from 'react';
 
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
@@ -11,9 +12,8 @@ import Typography from '@mui/material/Typography';
 
 import { useRouter } from 'src/routes/hooks';
 
-import { useMockedUser } from 'src/hooks/use-mocked-user';
-
 import { useAuthContext } from 'src/auth/hooks';
+import { AuthContext } from 'src/auth/context/jwt';
 
 import { varHover } from 'src/components/animate';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
@@ -40,7 +40,9 @@ const OPTIONS = [
 export default function AccountPopover() {
   const router = useRouter();
 
-  const { user } = useMockedUser();
+  // const { user } = useMockedUser();
+  const auth = useContext(AuthContext);
+  const { user } = auth;
 
   const { logout } = useAuthContext();
 
@@ -80,7 +82,7 @@ export default function AccountPopover() {
         }}
       >
         <Avatar
-          src={user?.photoURL}
+          src={user?.photoURL.url}
           alt={user?.displayName}
           sx={{
             width: 36,

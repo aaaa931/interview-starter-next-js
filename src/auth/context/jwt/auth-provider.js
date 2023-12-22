@@ -102,13 +102,13 @@ export function AuthProvider({ children }) {
   // LOGIN
   const login = useCallback(async (email, password) => {
     const data = {
-      email,
+      identifier: email,
       password,
     };
 
-    const response = await axios.post(endpoints.auth.login, data);
+    const response = await axios.post(endpoints.auth.local, data);
 
-    const { accessToken, user } = response.data;
+    const { jwt: accessToken, user } = response.data;
 
     setSession(accessToken);
 

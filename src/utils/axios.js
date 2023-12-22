@@ -33,6 +33,7 @@ export const endpoints = {
     me: '/api/auth/me',
     login: '/api/auth/login',
     register: '/api/auth/register',
+    local: '/api/auth/local',
   },
   mail: {
     list: '/api/mail/list',
@@ -49,5 +50,9 @@ export const endpoints = {
     list: '/api/product/list',
     details: '/api/product/details',
     search: '/api/product/search',
+  },
+  figures: '/api/figures',
+  token: {
+    refresh: '/api/token/refresh',
   },
 };
