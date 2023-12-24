@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 
 import { useRouter } from 'src/routes/hooks';
 
+import { HOST_API } from 'src/config-global';
 import { useAuthContext } from 'src/auth/hooks';
 import { AuthContext } from 'src/auth/context/jwt';
 
@@ -82,7 +83,7 @@ export default function AccountPopover() {
         }}
       >
         <Avatar
-          src={user?.photoURL.url}
+          src={`${HOST_API}${user?.photoURL.url}`}
           alt={user?.displayName}
           sx={{
             width: 36,
