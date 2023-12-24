@@ -54,7 +54,9 @@ export const tokenExpired = (exp) => {
     sessionStorage.setItem('accessToken', refreshToken);
 
     clearTimeout(expiredTimer);
-    tokenExpired(300);
+    // tokenExpired(300);
+    const { exp: refreshExp } = jwtDecode(refreshToken);
+    tokenExpired(refreshExp);
 
     // window.location.href = paths.auth.jwt.login;
   }, timeLeft);
